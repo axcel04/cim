@@ -1,53 +1,48 @@
-
-import { MoveLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+const categories = [
+  { key: "projects", label: "Projets", url: "/project" },
+  { key: "formations", label: "Formations", url: "/formations" },
+  { key: "partnership", label: "Collaboration", url: "/collaboration" },
+  { key: "login", label: "Login", url: "/login" },
+];
+
+const projects = [
+  { id: 1, nom: "location", logo: "/cim.png", description: "Le projet vient de résoudre les locations." },
+  { id: 2, nom: "getting house", logo: "/cim.png", description: "Le projet facilite l'obtention de logements étudiants." },
+  { id: 3, nom: "gestion club", logo: "/cim.png", description: "Gestion efficace des activités du club." },
+  { id: 4, nom: "plateforme membres", logo: "/cim.png", description: "Plateforme pour connecter tous les membres." },
+];
 
 function Project() {
-    const navigate = useNavigate();
-    const projets = [
-        {id:1,project:"Location",description:
-            "location c'est un  site web qui localise la ou il y'a un mobule perdue", 
-            image:""
-         },
-        {id:1,project:"Get House",description:
-            "Get House c'est un site web qui peut edee la population d'obtenir la maason"},
-        {id:1,project:"Meet ",description:
-            "Meet c'est un site web qui localise la ou il y'a un mobule perdue",
-            image:""
-        },
-        {id:1,project:"Belle photo",description:
-            "Belle photo c'est un site web qui localise la ou il y'a un mobule perdue",
-            image:""
-        },
-        {id:1,project:"Shoping",description:
-            "Shoping c'est un site web qui localise la ou il y'a un mobule perdue",
-             image:""
-        },
-         
-    ]
-    return (
-          
-        <div>
-            <div className="p-4 mb-4 bg-blue-600 flex gap-4 fixed top-0 w-full ">
-               <MoveLeft onClick={()=>navigate('/')}
-                 className="w-8 h-8 text-white" />  
-               <h1 className="font-bold text-white ml-2">Les projets realises</h1>
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <Header/>
+      <div className="mt-8 max-w-2xl mx-auto px-4">
+        {projects.map((prj) => (
+          <div
+            key={prj.id}
+            className="shadow-sm mb-8 p-6 rounded-sm border bg-white flex flex-col sm:flex-row gap-6 items-center"
+          >
+            <img
+              src={prj.logo}
+              alt={prj.nom}
+              className="w-20 h-20 rounded-full border-2 border-blue-200 object-cover"
+            />
+            <div className="flex-1">
+              <h2 className="text-xl font-bold text-blue-700">{prj.nom}</h2>
+              <p className="text-gray-700 text-base mt-2">{prj.description}</p>
             </div>
-            
-            <div className="mt-20">
-                {projets.map((prj,num)=>(
-                    <div key={num} className="shadow-md mb-4 mx-4 p-2">
-                        <div className="flex items-center py-2">
-                          <img src="image.jpg" alt="image"className="w-12 h-12 rounded-full"/>                        
-                          <span className="font-lg text-blue-600  font-light ml-2">{prj.project}</span>
-                        </div>
-                        <p className="text-sm">{prj.description}</p>
-                    </div>
-                    ))
-                }
-                     
-            </div>
-        </div>
-   )
+          </div>
+        ))}
+      </div>
+      <Footer />
+    </div>
+  );
 }
+
 export default Project;
