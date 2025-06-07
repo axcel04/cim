@@ -75,96 +75,112 @@ function Home() {
     { key: "login", label: "Login", url: "/login"  },
   ];
 
-  return (
-    <div className="relative bg-white min-h-screen text-sm mb-4">
-      {/* Barre de navigation en haut */}
-      <div className=" mb-4">
-        <div className="flex items-center justify-between bg-blue-600 py-7 px-4">
-            
-            <img src="image.jpg" alt="image"className="w-12 h-12 rounded-full"/>  
-            <p className="hidden md:block text-base font-semibold text-center flex-1 ml-4 text-white">
-              Club Informatique & Multimédia
-            </p>
-            <p className="block md:hidden text-xl font-bold text-center flex-1 ml-4 text-white">CIM ULT</p>
-            <Menu onClick={handleShow} className="w-6 h-6 cursor-pointer text-white" />
+// ...existing code...
+return (
+  <div className="relative bg-white min-h-screen text-sm mb-4">
+    {/* Sticky Navigation Bar */}
+    <header className="sticky top-0 z-50 bg-white shadow">
+      <nav className="flex items-center justify-between px-4 py-3 md:py-5">
+        {/* Logo and Site Name */}
+        <div className="flex items-center space-x-3">
+          <img src="/logo192.png" alt="CIM Logo" className="w-10 h-10 rounded-full" />
+          <span className="text-lg md:text-2xl font-bold text-blue-700">Club Informatique & Multimédia</span>
         </div>
-       <HeaderPhoto />
-      </div>
-      
-
-      {/* Menu affiché en overlay */}
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex space-x-6">
+          {categories.map(({ key, label, url }) => (
+            <button
+              key={key}
+              onClick={() => navigate(url)}
+              className="text-gray-700 hover:text-blue-700 font-medium transition"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        {/* Mobile Hamburger */}
+        <button
+          className="md:hidden p-2 rounded hover:bg-blue-50"
+          aria-label="Open menu"
+          onClick={handleShow}
+        >
+          <Menu className="w-6 h-6 text-blue-700" />
+        </button>
+      </nav>
+      {/* Mobile Menu Overlay */}
       {show && (
-        <div className="absolute top-16 right-0 w-[40%] flex justify-between bg-white p-2 rounded-sm shadow-lg z-50 max-h-[80vh] overflow-y-auto">
-
-          {/* icone dans le menu */}
-          <X className="text-sm" onClick={handleShow}/>
-            <div>
+        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end">
+          <div className="w-2/3 max-w-xs bg-white p-6 shadow-lg">
+            <button
+              className="mb-6"
+              aria-label="Close menu"
+              onClick={handleShow}
+            >
+              <X className="w-6 h-6 text-gray-700" />
+            </button>
+            <div className="flex flex-col space-y-4">
               {categories.map(({ key, label, url }) => (
-                <div key={key} className="mb-2 text-end">
-                  {/* Bouton de catégorie */}
-                  <div
-                    className={` ${
-                      activeCategory === key ? "bg-sky-50" : ""
-                    }`}
-                  >
-                    <button
-                      onClick={() => navigate(url)}
-                      className="w-full text-left font-normal text-sm"
-                    >
-                      {label}
-                    </button>
-                  </div>
-
-                  {/* Résultats affichés seulement si catégorie active */}
-                
-                </div>
+                <button
+                  key={key}
+                  onClick={() => {
+                    navigate(url);
+                    setShow(false);
+                  }}
+                  className="text-gray-700 hover:text-blue-700 text-lg font-medium text-left"
+                >
+                  {label}
+                </button>
               ))}
             </div>
+          </div>
         </div>
       )}
-
-      {/* Contenu Home (cards) toujours visible */}
-      <div className="mx-3">
-
-        <p className="py-2  text-xs ">Site de Club Informatique et Multimédia(CIM) est un site contient et bublie tous les activites 
-          realise dans la Club Informatique et Multimédia
-        </p>
-        <div className="my-8">
-          <h1 className="text-lg pl-4 font-bold mb-3">Les projets realises</h1>
-
-          {/* contenue de component card */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {projects.map((project) => (
-                  <Card
-                    key={project.id}
-                    title={project.nom}
-                    logo={project.logo}
-                    description={project.description}
+    </header>
+    {/* Header Photo */}
+    <HeaderPhoto />
+    {/* ...rest of your code... */}
+    
+          {/* Contenu Home (cards) toujours visible */}
+          <div className="mx-3">
+    
+            <p className="py-2  text-xs ">Site de Club Informatique et Multimédia(CIM) est un site contient et bublie tous les activites 
+              realise dans la Club Informatique et Multimédia
+            </p>
+            <div className="my-8">
+              <h1 className="text-lg pl-4 font-bold mb-3">Les projets realises</h1>
+    
+              {/* contenue de component card */}
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {projects.map((project) => (
+                      <Card
+                        key={project.id}
+                        title={project.nom}
+                        logo={project.logo}
+                        description={project.description}
+                      />
+                    ))}
+              </div>
+            </div>
+           {/*Contenu de component Formation */}
+           <div >
+              <h1 className="text-base pl-4 font-bold mb-3">Formations prevues</h1>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {formations.map((item) => (
+                  <Formation
+                    key={item.id}
+                    title={item.nom}
+                    imageSrc={item.image}
+                    dure={item.dure}
                   />
                 ))}
+              </div>
+           </div>
           </div>
-        </div>
-       {/*Contenu de component Formation */}
-       <div >
-          <h1 className="text-base pl-4 font-bold mb-3">Formations prevues</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {formations.map((item) => (
-              <Formation
-                key={item.id}
-                title={item.nom}
-                imageSrc={item.image}
-                dure={item.dure}
-              />
-            ))}
-          </div>
-       </div>
-      </div>
-
-      <Footer />
-
-    </div>
-
-  );
+    
+          <Footer />
+  </div>
+);
+// ...existing code...
 }
 
 export default Home;
