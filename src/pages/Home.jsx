@@ -1,7 +1,6 @@
-import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import Header from "../components/Header";
 import Card from "../components/Card";
-import { Laptop } from "lucide-react";
 import Formation from "../components/Formation";
 import Footer from "../components/Footer";
 import HeaderPhoto from "../components/HeaderPhoto";
@@ -99,67 +98,8 @@ const formations = [
 // ...existing code...
 return (
   <div className="relative bg-white min-h-screen text-sm mb-4">
-    {/* Sticky Navigation Bar */}
-    <header className="sticky top-0 z-50 bg-white shadow">
-      <nav className="flex items-center justify-between px-4 py-3 md:py-5">
-        {/* Logo and Site Name */}
-        <div className="flex items-center space-x-3">
-          <img src="/cim.png" alt="CIM Logo" className="w-10 h-10 rounded-full" />
-          <span className="text-lg font-medium md:font-bold">
-            <span className="md:hidden">CIM</span>
-            <span className="hidden md:inline">Club Informatique & Multimédia</span>
-          </span>
-        </div>
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-6">
-          {categories.map(({ key, label, url }) => (
-            <button
-              key={key}
-              onClick={() => navigate(url)}
-              className="text-gray-700 hover:text-blue-700 font-medium transition"
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden p-2 rounded hover:bg-blue-50"
-          aria-label="Open menu"
-          onClick={handleShow}
-        >
-          <Menu className="w-6 h-6" />
-        </button>
-      </nav>
-      {/* Mobile Menu Overlay */}
-      {show && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end">
-          <div className="w-2/3 max-w-xs bg-white p-6 shadow-lg">
-            <button
-              className="mb-6"
-              aria-label="Close menu"
-              onClick={handleShow}
-            >
-              <X className="w-6 h-6 text-gray-700" />
-            </button>
-            <div className="flex flex-col space-y-4">
-              {categories.map(({ key, label, url }) => (
-                <button
-                  key={key}
-                  onClick={() => {
-                    navigate(url);
-                    setShow(false);
-                  }}
-                  className="text-gray-700 hover:text-blue-700 text-lg font-medium text-left"
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-    </header>
+    {/* Header */}
+    <Header/>
     {/* Header Photo */}
     <HeaderPhoto />
     {/* ...rest of your code... */}
@@ -192,7 +132,7 @@ return (
 
         {/* Simple Posts Section */}
         <section className="my-8">
-          <h1 className="text-md md:text-lg font-bold mb-4 pl-2 border-l-4 border-gray-600 bg-gray-50 py-1">Annonces et Actualités</h1>
+          <h1 className="text-xl font-bold mb-4 pl-2 border-l-4 border-gray-600 bg-gray-50 py-1">Annonces et Actualités</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {simplePosts.map(post => (
               <Post key={post.id} {...post} />
