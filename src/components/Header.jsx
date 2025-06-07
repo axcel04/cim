@@ -58,7 +58,7 @@ function Header() {
             >
               <X className="w-6 h-6 text-gray-700" />
             </button>
-            <div className="flex flex-col space-y-1">
+            <div className="flex flex-col space-y-2">
               {categories.map(({ key, label, url, icon: Icon }) => (
                 <button
                 key={key}
@@ -68,7 +68,7 @@ function Header() {
                 }}
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-700 text-sm font-medium text-left"
                 >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-5 h-5 text-yellow-500" />
                 {label}
                 </button>
               ))}
