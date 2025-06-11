@@ -1,48 +1,28 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { MoveLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const categories = [
-  { key: "projects", label: "Projets", url: "/project" },
-  { key: "formations", label: "Formations", url: "/formations" },
-  { key: "partnership", label: "Collaboration", url: "/collaboration" },
-  { key: "login", label: "Login", url: "/login" },
-];
 
 // Use the same data as Home.jsx
-const formations = [
+const formation = [
   {
     id: 1,
     title: "Frontend",
     image: "/image.jpg",
     dure: "Formation de 3 mois, commence le 23/7/2025",
     description: "Cette formation couvre les bases du développement frontend, y compris HTML, CSS et JavaScript.",
-  },
-  {
-    id: 2,
-    title: "Backend",
-    image: "/image.jpg",
-    dure: "Formation de 3 mois, commence le 01/10/2025",
-    description: "Apprenez à créer des API robustes avec Node.js et Express.",
-  },
-  {
-    id: 3,
-    title: "Fullstack",
-    image: "/image.jpg",
-    dure: "Formation de 6 mois, commence le 15/01/2026",
-    description: "Devenez développeur fullstack en maîtrisant frontend et backend.",
-  },
+  }
+
 ];
 
-function Formations() {
+function Formation() {
   const navigate = useNavigate();
 
   return (
     <div>
       <Header/>
       <div className="mt-8 max-w-2xl mx-auto px-4">
-        {formations.map((forma) => (
+        {formation.map((forma) => (
           <div key={forma.id} className="shadow-sm mb-8 p-6 rounded-sm bg-white flex flex-col gap-4">
             <img
               src={forma.image}
@@ -62,4 +42,4 @@ function Formations() {
   );
 }
 
-export default Formations;
+export default Formation;

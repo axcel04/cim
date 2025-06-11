@@ -1,11 +1,12 @@
-import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import Card from "../components/Card";
-import { Laptop } from "lucide-react";
+import Header from "../components/Header";
+import Projet from "../components/Projet";
 import Formation from "../components/Formation";
 import Footer from "../components/Footer";
 import HeaderPhoto from "../components/HeaderPhoto";
 import { useNavigate } from "react-router-dom";
+import Post from "../components/Post";
+
 
 
 function Home() {
@@ -22,36 +23,55 @@ function Home() {
   const handleCategory = (category) => {
     setActiveCategory((prev) => (prev === category ? null : category));
   };
-
-  const projects = [
-    { id: 1, nom: "location",logo:"https://via.placeholder.com/150",
+const projects = [
+    { id: 1, nom: "location",logo:"/cim.png",
        description: "le projet vient de résoudre les locations" },
-    { id: 2, nom: "getting house",logo:"https://via.placeholder.com/150",
+    { id: 2, nom: "getting house",logo:"/cim.png",
        description: "le projet vient de résoudre les locations" },
-    { id: 3, nom: "location", logo:"https://via.placeholder.com/150",
+    { id: 3, nom: "location", logo:"/cim.png",
       description: "le projet vient de résoudre les locations" },
-    { id: 1, nom: "location",logo:"https://via.placeholder.com/150",
+    { id: 1, nom: "location",logo:"/cim.png",
       description: "le projet vient de résoudre les locations" },
   ];
 
-  const formations = [
+const formations = [
+    {
+        id: 1,
+        title: "Frontend",
+        image: "/image.jpg",
+        dure: "Formation de 3 mois, commence le 23/7/2025",
+        description: "Cette formation couvre les bases du développement frontend, y compris HTML, CSS et JavaScript.",
+    },
+    {
+        id: 2,
+        title: "Frontend",
+        image: "/image.jpg",
+        dure: "Formation de 3 mois, commence le 23/7/2025",
+        description: "Cette formation couvre les bases du développement frontend, y compris HTML, CSS et JavaScript.",
+    },
+    {
+        id: 3,
+        title: "Frontend",
+        image: "/image.jpg",
+        dure: "Formation de 3 mois, commence le 23/7/2025",
+        description: "Cette formation couvre les bases du développement frontend, y compris HTML, CSS et JavaScript.",
+    },
+];
+
+  const simplePosts = [
     {
       id: 1,
-      nom: "Frontend",
-      image: "https://via.placeholder.com/150",
-      dure: "Formation de 3 mois, commence le 23/7/2025",
+      title: "Annonce: Réunion générale",
+      image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80",
+      description: "Tous les membres sont invités à la réunion générale du club ce vendredi.",
+      date: "2025-06-05",
     },
     {
       id: 2,
-      nom: "Frontend",
-      image: "https://via.placeholder.com/150",
-      dure: "Formation de 3 mois, commence le 23/7/2025",
-    },
-    {
-      id: 3,
-      nom: "Frontend",
-      image: "https://via.placeholder.com/150",
-      dure: "Formation de 3 mois, commence le 23/7/2025",
+      title: "Annonce: Hackathon",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+      description: "Participez au hackathon annuel du club, ouvert à tous les membres.",
+      date: "2025-06-10",
     },
   ];
 
@@ -75,96 +95,56 @@ function Home() {
     { key: "login", label: "Login", url: "/login"  },
   ];
 
-  return (
-    <div className="relative bg-white min-h-screen text-sm mb-4">
-      {/* Barre de navigation en haut */}
-      <div className=" mb-4">
-        <div className="flex items-center justify-between bg-blue-600 py-7 px-4">
-            
-            <img src="image.jpg" alt="image"className="w-12 h-12 rounded-full"/>  
-            <p className="hidden md:block text-base font-semibold text-center flex-1 ml-4 text-white">
-              Club Informatique & Multimédia
-            </p>
-            <p className="block md:hidden text-xl font-bold text-center flex-1 ml-4 text-white">CIM ULT</p>
-            <Menu onClick={handleShow} className="w-6 h-6 cursor-pointer text-white" />
-        </div>
-       <HeaderPhoto />
-      </div>
-      
-
-      {/* Menu affiché en overlay */}
-      {show && (
-        <div className="absolute top-16 right-0 w-[40%] flex justify-between bg-white p-2 rounded-sm shadow-lg z-50 max-h-[80vh] overflow-y-auto">
-
-          {/* icone dans le menu */}
-          <X className="text-sm" onClick={handleShow}/>
-            <div>
-              {categories.map(({ key, label, url }) => (
-                <div key={key} className="mb-2 text-end">
-                  {/* Bouton de catégorie */}
-                  <div
-                    className={` ${
-                      activeCategory === key ? "bg-sky-50" : ""
-                    }`}
-                  >
-                    <button
-                      onClick={() => navigate(url)}
-                      className="w-full text-left font-normal text-sm"
-                    >
-                      {label}
-                    </button>
-                  </div>
-
-                  {/* Résultats affichés seulement si catégorie active */}
-                
-                </div>
-              ))}
-            </div>
-        </div>
-      )}
-
-      {/* Contenu Home (cards) toujours visible */}
+// ...existing code...
+return (
+  <div className="relative bg-white min-h-screen text-sm mb-4">
+    {/* Header */}
+    <Header/>
+    {/* Header Photo */}
+    <HeaderPhoto />
+    {/* ...rest of your code... */}
+    
+          {/* Contenu Home (cards) toujours visible */}
       <div className="mx-3">
-
-        <p className="py-2  text-xs ">Site de Club Informatique et Multimédia(CIM) est un site contient et bublie tous les activites 
-          realise dans la Club Informatique et Multimédia
-        </p>
-        <div className="my-8">
-          <h1 className="text-lg pl-4 font-bold mb-3">Les projets realises</h1>
-
-          {/* contenue de component card */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {projects.map((project) => (
-                  <Card
-                    key={project.id}
-                    title={project.nom}
-                    logo={project.logo}
-                    description={project.description}
-                  />
-                ))}
-          </div>
-        </div>
-       {/*Contenu de component Formation */}
-       <div >
-          <h1 className="text-base pl-4 font-bold mb-3">Formations prevues</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {formations.map((item) => (
-              <Formation
-                key={item.id}
-                title={item.nom}
-                imageSrc={item.image}
-                dure={item.dure}
-              />
+    
+            <p className="py-2  text-xs ">Site de Club Informatique et Multimédia(CIM) est un site contient et bublie tous les activites 
+              realise dans la Club Informatique et Multimédia
+            </p>
+        {/* Projects Section */}
+        <section className="my-8">
+          <h1 className="text-md md:text-lg  font-bold mb-4 pl-2 border-l-4 border-blue-600 bg-blue-50 py-1">Projets réalisés</h1>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {projects.map(project => (
+              <Projet key={project.id} {...project} />
             ))}
           </div>
-       </div>
+        </section>
+
+        {/* Formations Section */}
+        <section className="my-8">
+          <h1 className="text-md md:text-lg font-bold mb-4 pl-2 border-l-4 border-green-600 bg-green-50 py-1">Formations prévues</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {formations.map(formation => (
+              <Formation key={formation.id} {...formation} />
+            ))}
+          </div>
+        </section>
+
+        {/* Simple Posts Section */}
+        <section className="my-8">
+          <h1 className="text-xl font-bold mb-4 pl-2 border-l-4 border-gray-600 bg-gray-50 py-1">Annonces et Actualités</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {simplePosts.map(post => (
+              <Post key={post.id} {...post} />
+            ))}
+          </div>
+        </section>
       </div>
-
+    
       <Footer />
-
-    </div>
-
-  );
+  </div>
+);
+// ...existing code...
 }
 
 export default Home;

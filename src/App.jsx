@@ -3,30 +3,32 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Post from "./pages/Post";
-import Dashboard from "./pages/Dashboard";
-import Project from "./pages/Project";
+import Actualite from "./pages/Actualite";
+import Projects from "./pages/Projects";
 import Formations from "./pages/Formations";
 import Collaboration from "./pages/Collaboration";
-import Following from "./pages/Following";
+import Formation from "./pages/formation";
+import Project from "./pages/Project";
 
 function App() {
   return(
     <>
     <BrowserRouter>
        <Routes>
-         <Route path="/gggxg" element={<Following/>} />
          <Route path="/" element={<Home />} />
          <Route path="/login" element={<Login />} />
          <Route path="/register" element={<Register />} />
          <Route path="/post" element={<Post/>} />
-         <Route path="/dashboard" element={<Dashboard/>} />
-         <Route path="/project" element={<Project/>} />
+         <Route path="/actualite" element={<Actualite/>} />
+         <Route path="/projects" element={<Projects/>} />
          <Route path="/formations" element={<Formations/>} />
          <Route path="/collaboration" element={<Collaboration/>} />
+         <Route path="/formation" element={<Formation/>} />
+         <Route path="/project" element={<Project/>} />
         </Routes>
     </BrowserRouter>
-    
     </>
   )
 }
+
 export default App;
