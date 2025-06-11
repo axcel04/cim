@@ -79,10 +79,10 @@ function Post() {
           title: "Titre de la formation",
           description: "Détails de la formation",
         };
-      case "event":
+      case "actualite":
         return {
-          title: "Titre de l’événement",
-          description: "Description de l’événement",
+          title: "Titre de l’actualite",
+          description: "Description de l’actualite",
         };
       default:
         return { title: "", description: "" };
@@ -98,8 +98,8 @@ function Post() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Header />
-      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
+      <Header className="fixed z-50"/>
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6 ">
         <div className="flex items-center gap-4 mb-6">
           <button
             className="p-2 "
@@ -114,7 +114,7 @@ function Post() {
         <div className="bg-white rounded-xl shadow p-6 mb-8">
           <h3 className="font-semibold text-base mb-4 text-gray-700">Créer un post :</h3>
           <div className="flex justify-center gap-4 mb-4">
-            {["projet", "formation", "event"].map((type) => (
+            {["projet", "formation", "actualite"].map((type) => (
               <label key={type} className="cursor-pointer">
                 <input
                   type="radio"
@@ -122,9 +122,9 @@ function Post() {
                   value={type}
                   checked={selected === type}
                   onChange={handleChange}
-                  className="mr-1 accent-blue-600"
+                  className="mr-1 accent-green-600"
                 />
-                <span className={selected === type ? "text-blue-700 font-semibold" : ""}>
+                <span className={selected === type ? "text-blue-600 font-semibold" : ""}>
                   {type.charAt(0).toUpperCase() + type.slice(1)}
                 </span>
               </label>
@@ -149,16 +149,7 @@ function Post() {
                   className="w-40 h-40 object-cover mx-auto rounded"
                 />
               )}
-              {selected === "formation" && (
-                <input
-                  type="text"
-                  name="duration"
-                  onChange={getPostData}
-                  value={post.duration}
-                  placeholder="Durée de la formation"
-                  className="border border-gray-300 p-2 rounded w-full"
-                />
-              )}
+
               <input
                 type="text"
                 name="title"
@@ -167,6 +158,17 @@ function Post() {
                 placeholder={titlePlaceholder}
                 className="border border-gray-300 p-2 rounded w-full"
               />
+
+              {selected != "projet" && (
+                <input
+                  type="text"
+                  name="duration"
+                  onChange={getPostData}
+                  value={post.duration}
+                  placeholder="Date prevue"
+                  className="border border-gray-300 p-2 rounded w-full"
+                />
+              )}
               <textarea
                 name="description"
                 onChange={getPostData}
@@ -187,7 +189,7 @@ function Post() {
         {postsList.length > 0 && (
           <div className="mt-6 border-t pt-4">
             <h3 className="text-base font-semibold mb-3 text-gray-700">Posts publiés :</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
               {postsList.map((item, index) => (
                 <div key={index} className="relative p-4 border rounded-xl shadow bg-sky-50 flex flex-col">
                   {item.image && (
@@ -198,16 +200,16 @@ function Post() {
                     />
                   )}
                   <h4 className="font-semibold text-blue-700">{item.title}</h4>
-                  {item.type === "formation" && item.duration && (
-                    <p className="text-xs text-gray-700">
+                  {item.type === ("formation" && "actualite") && item.duration && (
+                    <p className="text-xs text-gray-7005">
                       <strong>Durée :</strong> {item.duration}
                     </p>
                   )}
-                  <p className="text-xs text-gray-600 mt-1">{item.description}</p>
+                  {/* <p className="text-xs text-gray-600 mt-1">{item.description}</p> */}
                   <span className="text-[10px] text-gray-500 italic mt-2">{item.type}</span>
                   <button
                     onClick={() => deletePost(index)}
-                    className="absolute bottom-2 right-2 text-xs text-white hover:text-red-800 h-5 w-16 rounded bg-blue-600"
+                    className="absolute bottom-2 right-2 text-xs text-white hover:text-red-800 h-5 w-16 rounded bg-green-600"
                   >
                     Supprimer
                   </button>

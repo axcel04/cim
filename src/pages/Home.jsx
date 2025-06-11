@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "../components/Header";
-import Card from "../components/Card";
+import Projet from "../components/Projet";
 import Formation from "../components/Formation";
 import Footer from "../components/Footer";
 import HeaderPhoto from "../components/HeaderPhoto";
@@ -105,7 +105,7 @@ return (
     {/* ...rest of your code... */}
     
           {/* Contenu Home (cards) toujours visible */}
-          <div className="mx-3">
+      <div className="mx-3">
     
             <p className="py-2  text-xs ">Site de Club Informatique et Multimédia(CIM) est un site contient et bublie tous les activites 
               realise dans la Club Informatique et Multimédia
@@ -113,9 +113,9 @@ return (
         {/* Projects Section */}
         <section className="my-8">
           <h1 className="text-md md:text-lg  font-bold mb-4 pl-2 border-l-4 border-blue-600 bg-blue-50 py-1">Projets réalisés</h1>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {projects.map(project => (
-              <Card key={project.id} {...project} />
+              <Projet key={project.id} {...project} />
             ))}
           </div>
         </section>
@@ -139,9 +139,9 @@ return (
             ))}
           </div>
         </section>
-          </div>
+      </div>
     
-          <Footer />
+      <Footer />
   </div>
 );
 // ...existing code...

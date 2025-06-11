@@ -16,7 +16,7 @@ function Formation({ title, image, dure, date }) {
       <p className="text-xs text-gray-600 mb-2">{dure}</p>
       <div className="text-end">
         <button
-          onClick={() => navigate('/formations')}
+          onClick={() => navigate('/formation')}
           className="rounded bg-green-600 px-3 py-1 text-white text-xs hover:bg-green-700"
         >
           Description

@@ -30,7 +30,7 @@ const simplePosts = [
   },
 ];
 
-function Posts() {
+function Actualite() {
   const navigate = useNavigate();
 
   return (
@@ -57,4 +57,4 @@ function Posts() {
   );
 }
 
-export default Posts;
+export default Actualite;

@@ -1,4 +1,4 @@
-import { Menu, X, Home, Folder, GraduationCap, Newspaper, LogIn } from "lucide-react";
+import { Menu, X, Home, Folder, GraduationCap, Newspaper, LogIn, Handshake } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,9 +8,10 @@ function Header() {
 
   const categories = [
       { key: "home", label: "Acceuil", url: "/", icon: Home },
-      { key: "projects", label: "Projets", url: "/project", icon: Folder },
+      { key: "projects", label: "Projets", url: "/projects", icon: Folder },
       { key: "formations", label: "Formations", url: "/formations", icon: GraduationCap },
       { key: "actualite", label: "Actualite", url: "/actualite", icon: Newspaper },
+      {key:"collaborateurs", label:"Collaborateurs", url:"/collaboration",icon: Handshake},    
       { key: "login", label: "Login", url: "/login", icon: LogIn },
   ];
 

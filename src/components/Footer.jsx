@@ -46,8 +46,8 @@ function Footer() {
       <div className="relative flex items-center justify-center max-w-3xl mx-auto px-4">
         {/* Logos */}
         <div className="flex gap-8 justify-center items-center w-full py-4">
-          {getVisibleLogos().map((logo, idx) => (
-            <div key={logo.name + idx} className="flex flex-col items-center min-w-[150px]">
+          {getVisibleLogos().map((logo,idx) => (
+            <div key={ logo.name + idx } className="flex flex-col items-center min-w-[150px]">
               <img
                 src={logo.src}
                 alt={logo.name}

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 function Register() {
    const [user,setUser] = useState({nom:"",prenom:"",email:"",password:""});
    const[alert,setAlert] = useState("");
    const timeoutRef = useRef(null); // pour garder l'ID de setTimeout
+   const[show,setShow] = useState(false);
 
    const navigate = useNavigate();
    const metreAJouruser = (champ,value) =>{
@@ -23,7 +25,7 @@ function Register() {
    }, []);
    
    const registerUser = () => {      
-      if(user.email=="" || user.password=="" || user.nom=="" || user.prenom=="") {
+      if(user.email =="" || user.password=="" || user.nom =="" || user.prenom =="" ) {
          setAlert("Veuillez complete tous les champs ");
         if(timeoutRef.current) {
            clearTimeout(timeoutRef.current)
@@ -43,10 +45,13 @@ function Register() {
    
 return(
    <>
-       <p className=" p-1 mt-2 mr-4 flex justify-end w-72 text-sm text-red-500 " >{alert}</p>
     
-    <div className="flex flex-col items-center">
-      <h1 className="flex justify-center p-16 font-bold text-2xl">Enregistrement</h1>
+    <div className="flex flex-col items-center shadow m-4 pb-12 rounded-lg">
+      <img src="cim.png" alt="logo"className="w-20 h-20 mt-12 "/>
+
+      <h1 className="flex justify-center p-8 font-bold text-2xl">Enregistrement</h1>
+       <p className=" p-1 mt-2 mr-4 text-center w-72 text-xs text-blue-600 " >{alert}</p>
+
       <div className="flex flex-col w-50 gap-4 items-center ">
         < input type="text" 
           value={user.nom}
@@ -69,14 +74,21 @@ return(
            placeholder="Entrer votre email" 
            className="border border-gray-300 p-2 rounded w-full"
          />
-        <input type="password"
+         <div className="relative w-full">
+           <input type={show? "text":"password" }
            value={user.password}
            name="password"
            onChange={(e)=> metreAJouruser("password",e.target.value)} 
            placeholder="Mot de passe"
            className="border border-gray-300 p-2 rounded w-full"
            />
-        <button type="button" onClick={registerUser} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Enregistrer</button>
+           <div onClick={()=>setShow(!show)} 
+            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:gray-700 cursor-pointer">
+               {show ? <EyeOff size={20} /> : <Eye size={20} />}
+           </div>
+         </div>
+
+        <button type="button" onClick={registerUser} className="bg-green-600 text-white px-4 py-2 rounded hover:bg-yellow-400 w-full">Enregistrer</button>
 
         <div className="text-sm p-2" >
             <span className="-ml-1">Vous avez deja un compte ? </span>
