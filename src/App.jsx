@@ -9,12 +9,14 @@ import Formations from "./pages/Formations";
 import Collaboration from "./pages/Collaboration";
 import Formation from "./pages/formation";
 import Project from "./pages/Project";
+// import PostForm from "./pages/Signup";
 
 function App() {
   return(
     <>
     <BrowserRouter>
        <Routes>
+        {/* <Route path="/" element={<PostForm />} /> */}
          <Route path="/" element={<Home />} />
          <Route path="/login" element={<Login />} />
          <Route path="/register" element={<Register />} />

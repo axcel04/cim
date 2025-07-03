@@ -52,7 +52,7 @@ return(
        <div className="flex flex-col items-center pt-8">
                 <img src="cim.png" alt="logo"className="w-20 h-20"/>
 
-               <h1 className="flex justify-center p-8 font-bold text-2xl">Connexion</h1>
+               <h1 className="flex justify-center p-8 font-bold text-2xl">Login</h1>
                <p className=" p-1 mt-2 mr-4 w-72 text-xs text-center text-blue-600 " >{alert}</p>
             
          <div className="flex flex-col w-50 gap-4 items-center mb-4">

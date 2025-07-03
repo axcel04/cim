@@ -1,31 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
+import axios from "axios";
 
 function Register() {
-   const [user,setUser] = useState({nom:"",prenom:"",email:"",password:""});
+   const [user,setUser] = useState({first_name:"",last_name:"",username:"",password:""});
    const[alert,setAlert] = useState("");
    const timeoutRef = useRef(null); // pour garder l'ID de setTimeout
    const[show,setShow] = useState(false);
 
    const navigate = useNavigate();
-   const metreAJouruser = (champ,value) =>{
-    setUser((prev)=>({...prev,[champ]:value}))
-   }
 
-   useEffect(()=>{
-      const data = localStorage.getItem('login')
-      if(data){
-         setUser(JSON.parse(data));
-      }
-     // supprime timeoutRef.current
-   return () => {
-      clearTimeout(timeoutRef.current)
-   }
-   }, []);
+   const metreAJouruser = (e) =>{
+      const {name, value} = e.target;
+      setUser((prev)=>({...prev,[name]:value}))
+    }
+
+   // useEffect(()=>{
+   //    const data = localStorage.getItem('login')
+   //    if(data){
+   //       setUser(JSON.parse(data));
+   //    }
+   //   // supprime timeoutRef.current
+   // return () => {
+   //    clearTimeout(timeoutRef.current)
+   // }
+   // }, []);
    
-   const registerUser = () => {      
-      if(user.email =="" || user.password=="" || user.nom =="" || user.prenom =="" ) {
+   const registerUser = (e) => { 
+      e.preventDefault();    
+      if(user.username =="" || user.password=="" || user.first_name =="" || user.last_name =="" ) {
          setAlert("Veuillez complete tous les champs ");
         if(timeoutRef.current) {
            clearTimeout(timeoutRef.current)
@@ -33,11 +37,33 @@ function Register() {
         timeoutRef.current = setTimeout(()=>{setAlert("")},3000);
          return ;
       } 
+        console.log(user); 
+      // localStorage.setItem("login",JSON.stringify(user))
+      //  console.log("Formuleur est stock localement",user)
+      axios.post("https://clubtechlac.bi/user/", user, {
+      headers: {
+         'Content-Type': 'application/json'
+      }
+      })
+      .then(resp => {
+         console.log("Reponse du serveur:", resp.data);
+         setAlert("Enregistrement reussi, vous pouvez vous connecter");
+         if(timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+         };
+         timeoutRef.current = setTimeout(()=>{setAlert("")},3000);
+      })
+      .catch(saporo => {
+         console.error("Erreur Axios:", saporo);
+         if (saporo.response) {
+            console.error("Réponse du serveur:", saporo.response.data);
+            setAlert("Erreur : " + JSON.stringify(saporo.response.data));
+         }
+         });
 
-         
-      localStorage.setItem("login",JSON.stringify(user))
-      console.log("Formuleur est stock localement",user)
-      setUser({email:"",password:"",nom:"",prenom:""});
+
+      
+      setUser({username:"",password:"",first_name:"",last_name:""});
       setTimeout(()=>{
           navigate('/login');
       },2000);
@@ -54,31 +80,33 @@ return(
 
       <div className="flex flex-col w-50 gap-4 items-center ">
         < input type="text" 
-          value={user.nom}
-           onChange={(e)=>setUser("nom",e.target.value)}
+          value={user.first_name}
+          name="first_name"
+           onChange={metreAJouruser}
             placeholder="Nom"
             className="border border-gray-300 p-2 rounded w-full"
          />
 
         <input type="text" 
-          value={user.prenom}
-           onChange={(e)=>setUser("prenom",e.target.value)}
+          value={user.last_name}
+           onChange={metreAJouruser}
             placeholder="Prenom"
+            name="last_name"
             className="border border-gray-300 p-2 rounded w-full"
          />
            
-        <input type="email" 
-           value={user.email}
-           name="email"
-           onChange={(e)=>metreAJouruser("email",e.target.value)}
-           placeholder="Entrer votre email" 
+        <input type="text" 
+           value={user.username}
+           name="username"
+           onChange={metreAJouruser}
+           placeholder="Entrer nom d'utilisateur" 
            className="border border-gray-300 p-2 rounded w-full"
          />
          <div className="relative w-full">
            <input type={show? "text":"password" }
            value={user.password}
            name="password"
-           onChange={(e)=> metreAJouruser("password",e.target.value)} 
+           onChange={metreAJouruser} 
            placeholder="Mot de passe"
            className="border border-gray-300 p-2 rounded w-full"
            />

@@ -49,17 +49,18 @@ function Header() {
           <Menu className="w-6 h-6" />
         </button>
       </nav>
-        {show && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-end">
-            <div className="w-2/3 max-w-xs bg-white p-6 shadow-lg">
+        
+          <div className={`fixed top-0 right-0 w-2/3 max-w-xs bg-white p-6 space-y-2 h-full transform ${show ? "translate-x-0" : "translate-x-full"} 
+              transition-transform duration-300  ease-in-out z-50 flex justify-center shadow-lg`}>
+            
             <button
-              className="mb-2"
+              className="mb-2 absolute top-4 right-4 p-2 rounded hover:bg-gray-100"
               aria-label="Close menu"
               onClick={handleShow}
             >
               <X className="w-6 h-6 text-gray-700" />
             </button>
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col pt-8 space-y-2">
               {categories.map(({ key, label, url, icon: Icon }) => (
                 <button
                 key={key}
@@ -74,10 +75,11 @@ function Header() {
                 </button>
               ))}
             </div>
-            </div>
+      
           </div>
-        )}
-                    
+      {show && (<div onClick={handleShow} className="fixed top-0 inset-0 bg-black bg-opacity-40 z-30"
+         ></div>)}
+
     </header>
   );
 }
